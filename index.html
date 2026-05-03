@@ -1,1 +1,124 @@
-<!DOCTYPE html><html lang="en-GB"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>John Pye Reverse Calculator</title><style>body{font-family:system-ui,sans-serif;background:#f4f7fb;margin:0;padding:24px;display:flex;justify-content:center;align-items:center;min-height:100vh}.app{background:#fff;max-width:480px;width:100%;padding:28px;border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,.08)}h1{text-align:center}.subtitle{text-align:center;color:#666}input{width:100%;padding:14px;border-radius:12px;border:1px solid #ccc;font-size:1rem}.toggle{display:flex;justify-content:space-between;align-items:center;margin:20px 0}.result{background:#eef6ff;padding:20px;border-radius:16px;margin-top:20px}.value{font-size:2rem;font-weight:700;color:#2563eb}.warning{color:#dc2626;margin-top:12px;display:none}</style></head><body><main class="app"><h1>John Pye Reverse Calculator</h1><p class="subtitle">Work backwards from your maximum spend to find the highest safe hammer bid.</p><label for="target">Maximum Total Final Price (£)</label><input id="target" type="number" step="0.01" placeholder="e.g. 150.00"><div class="toggle"><span>Does VAT apply to the hammer price?</span><input id="vat" type="checkbox" checked></div><div class="result"><div>Maximum Hammer Bid</div><div class="value" id="result">£0.00</div><div id="verification">Verification: £0.00 + fees = £0.00</div><div class="warning" id="warning">Your target total must be at least £9.59 to cover delivery charges.</div></div></main><script>const DELIVERY=9.588;const target=document.getElementById('target');const vat=document.getElementById('vat');const result=document.getElementById('result');const verification=document.getElementById('verification');const warning=document.getElementById('warning');function money(v){return '£'+v.toFixed(2)}function calc(){const total=parseFloat(target.value);if(isNaN(total)||total<=0){result.textContent='£0.00';verification.textContent='Verification: £0.00 + fees = £0.00';warning.style.display='none';return}if(total<DELIVERY){result.textContent='—';verification.textContent='Verification unavailable';warning.style.display='block';return}warning.style.display='none';const mult=vat.checked?1.5:1.3;const bid=(total-DELIVERY)/mult;const calcTotal=bid*mult+DELIVERY;result.textContent=money(bid);verification.textContent=`Verification: ${money(bid)} + fees = ${money(calcTotal)}`}target.addEventListener('input',calc);vat.addEventListener('change',calc);calc();</script></body></html>
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>John Pye Reverse Calculator</title>
+<style>
+body{font-family:system-ui,sans-serif;background:#f4f7fb;margin:0;padding:24px;display:flex;justify-content:center;align-items:center;min-height:100vh;color:#1f2937}
+.app{background:#fff;max-width:520px;width:100%;padding:28px;border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,.08)}
+h1{text-align:center;margin-top:0}
+.subtitle{text-align:center;color:#666;margin-bottom:24px}
+.field{margin-bottom:18px}
+label{display:block;font-weight:600;margin-bottom:8px}
+input[type="number"]{width:100%;padding:14px;border-radius:12px;border:1px solid #ccc;font-size:1rem;box-sizing:border-box}
+.toggle{display:flex;justify-content:space-between;align-items:center;padding:14px;border:1px solid #ddd;border-radius:12px;background:#f8fafc}
+.result{background:#eef6ff;padding:22px;border-radius:16px;margin-top:22px}
+.value{font-size:2.2rem;font-weight:800;color:#2563eb;margin:8px 0 16px}
+.breakdown{background:#fff;border-radius:12px;padding:14px;margin-top:16px;border:1px solid #dbeafe}
+.row{display:flex;justify-content:space-between;margin:8px 0;font-size:.95rem}
+.total{font-weight:700;border-top:1px solid #ddd;padding-top:10px;margin-top:10px}
+.warning{color:#dc2626;margin-top:14px;display:none}
+</style>
+</head>
+<body>
+<main class="app">
+<h1>John Pye Reverse Calculator</h1>
+<p class="subtitle">Work backwards from your maximum spend to find the highest safe hammer bid.</p>
+
+<div class="field">
+<label for="target">Maximum Total Final Price (£)</label>
+<input id="target" type="number" step="0.01" placeholder="e.g. 150.00">
+</div>
+
+<div class="field">
+<label for="delivery">Delivery Cost (£)</label>
+<input id="delivery" type="number" step="0.01" value="9.59">
+</div>
+
+<div class="toggle">
+<span>Does VAT apply to the hammer price?</span>
+<input id="vat" type="checkbox" checked>
+</div>
+
+<div class="result">
+<div>Maximum Hammer Bid</div>
+<div class="value" id="result">£0.00</div>
+<div id="verification">Verification: £0.00 total</div>
+
+<div class="breakdown">
+<div class="row"><span>Hammer Bid</span><span id="hammerFee">£0.00</span></div>
+<div class="row"><span>VAT on Hammer</span><span id="vatFee">£0.00</span></div>
+<div class="row"><span>Buyer’s Premium (inc VAT)</span><span id="bpFee">£0.00</span></div>
+<div class="row"><span>Delivery</span><span id="deliveryFee">£0.00</span></div>
+<div class="row total"><span>Total</span><span id="finalTotal">£0.00</span></div>
+</div>
+
+<div class="warning" id="warning">Your target total must at least cover the delivery cost.</div>
+</div>
+</main>
+
+<script>
+const target=document.getElementById('target');
+const delivery=document.getElementById('delivery');
+const vat=document.getElementById('vat');
+const result=document.getElementById('result');
+const verification=document.getElementById('verification');
+const warning=document.getElementById('warning');
+
+const hammerFee=document.getElementById('hammerFee');
+const vatFee=document.getElementById('vatFee');
+const bpFee=document.getElementById('bpFee');
+const deliveryFee=document.getElementById('deliveryFee');
+const finalTotal=document.getElementById('finalTotal');
+
+function money(v){return '£'+v.toFixed(2)}
+
+function calc(){
+const total=parseFloat(target.value);
+const deliveryCost=parseFloat(delivery.value)||0;
+
+if(isNaN(total)||total<=0){
+result.textContent='£0.00';
+verification.textContent='Verification: £0.00 total';
+hammerFee.textContent='£0.00';
+vatFee.textContent='£0.00';
+bpFee.textContent='£0.00';
+deliveryFee.textContent='£0.00';
+finalTotal.textContent='£0.00';
+warning.style.display='none';
+return;
+}
+
+if(total<deliveryCost){
+result.textContent='—';
+verification.textContent='Verification unavailable';
+warning.style.display='block';
+return;
+}
+
+warning.style.display='none';
+
+const multiplier=vat.checked?1.5:1.3;
+const bid=(total-deliveryCost)/multiplier;
+const vatOnHammer=vat.checked?bid*0.2:0;
+const buyersPremium=bid*0.3;
+const calculatedTotal=bid+vatOnHammer+buyersPremium+deliveryCost;
+
+result.textContent=money(bid);
+verification.textContent=`Verification: ${money(calculatedTotal)} total`;
+
+hammerFee.textContent=money(bid);
+vatFee.textContent=money(vatOnHammer);
+bpFee.textContent=money(buyersPremium);
+deliveryFee.textContent=money(deliveryCost);
+finalTotal.textContent=money(calculatedTotal);
+}
+
+target.addEventListener('input',calc);
+delivery.addEventListener('input',calc);
+vat.addEventListener('change',calc);
+calc();
+</script>
+</body>
+</html>
