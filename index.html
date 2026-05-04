@@ -15,134 +15,31 @@
 --soft:#f8fbff;
 }
 *{box-sizing:border-box}
-body{
-margin:0;
-font-family:Inter,system-ui,sans-serif;
-background:linear-gradient(180deg,#f4f8ff 0%,#eaf1ff 100%);
-min-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-padding:24px;
-color:var(--text)
-}
-.app{
-width:100%;
-max-width:560px;
-background:var(--card);
-border-radius:28px;
-padding:30px;
-box-shadow:0 20px 60px rgba(37,99,235,.12);
-border:1px solid rgba(255,255,255,.8)
-}
-.badge{
-display:inline-block;
-padding:6px 12px;
-border-radius:999px;
-background:#dbeafe;
-color:#1d4ed8;
-font-size:.8rem;
-font-weight:700;
-margin-bottom:14px
-}
-h1{
-margin:0 0 10px;
-font-size:2rem;
-line-height:1.1
-}
-.subtitle{
-margin:0 0 28px;
-color:var(--muted);
-line-height:1.6
-}
-.grid{
-display:grid;
-gap:18px
-}
-.field{
-background:var(--soft);
-padding:18px;
-border-radius:18px;
-border:1px solid var(--border)
-}
-label{
-display:block;
-font-size:.92rem;
-font-weight:700;
-margin-bottom:10px
-}
-input{
-width:100%;
-padding:16px;
-border-radius:14px;
-border:1px solid var(--border);
-font-size:1.05rem;
-background:white;
-outline:none
-}
-input:focus{
-border-color:var(--primary);
-box-shadow:0 0 0 4px rgba(37,99,235,.12)
-}
-.result{
-margin-top:24px;
-padding:24px;
-border-radius:24px;
-background:linear-gradient(135deg,#2563eb 0%,#3b82f6 100%);
-color:white
-}
-.result-title{
-font-size:.95rem;
-opacity:.9
-}
-.result-value{
-font-size:3rem;
-font-weight:800;
-margin:10px 0 18px;
-line-height:1
-}
-.breakdown{
-background:rgba(255,255,255,.12);
-padding:18px;
-border-radius:18px;
-backdrop-filter:blur(6px)
-}
-.row{
-display:flex;
-justify-content:space-between;
-padding:10px 0;
-font-size:.96rem;
-border-bottom:1px solid rgba(255,255,255,.12)
-}
+body{margin:0;font-family:Inter,system-ui,sans-serif;background:linear-gradient(180deg,#f4f8ff 0%,#eaf1ff 100%);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;color:var(--text)}
+.app{width:100%;max-width:560px;background:var(--card);border-radius:28px;padding:30px;box-shadow:0 20px 60px rgba(37,99,235,.12);border:1px solid rgba(255,255,255,.8)}
+.badge{display:inline-block;padding:6px 12px;border-radius:999px;background:#dbeafe;color:#1d4ed8;font-size:.8rem;font-weight:700;margin-bottom:14px}
+h1{margin:0 0 10px;font-size:2rem;line-height:1.1}
+.subtitle{margin:0 0 28px;color:var(--muted);line-height:1.6}
+.grid{display:grid;gap:18px}
+.field{background:var(--soft);padding:18px;border-radius:18px;border:1px solid var(--border)}
+label{display:block;font-size:.92rem;font-weight:700;margin-bottom:10px}
+input{width:100%;padding:16px;border-radius:14px;border:1px solid var(--border);font-size:1.05rem;background:white;outline:none}
+input:focus{border-color:var(--primary);box-shadow:0 0 0 4px rgba(37,99,235,.12)}
+.result{margin-top:24px;padding:24px;border-radius:24px;background:linear-gradient(135deg,#2563eb 0%,#3b82f6 100%);color:white}
+.result-title{font-size:.95rem;opacity:.9}
+.result-value{font-size:3rem;font-weight:800;margin:10px 0 18px;line-height:1}
+.breakdown{background:rgba(255,255,255,.12);padding:18px;border-radius:18px;backdrop-filter:blur(6px)}
+.row{display:flex;justify-content:space-between;padding:10px 0;font-size:.96rem;border-bottom:1px solid rgba(255,255,255,.12)}
 .row:last-child{border-bottom:none}
-.total{
-font-weight:800;
-font-size:1.02rem;
-padding-top:14px
-}
-.note{
-margin-top:18px;
-font-size:.88rem;
-line-height:1.5;
-color:rgba(255,255,255,.88)
-}
-.warning{
-margin-top:16px;
-padding:14px;
-border-radius:14px;
-background:#fff1f2;
-color:#be123c;
-display:none
-}
-@media(max-width:640px){
-.app{padding:22px}
-.result-value{font-size:2.4rem}
-}
+.total{font-weight:800;font-size:1.02rem;padding-top:14px}
+.note{margin-top:18px;font-size:.88rem;line-height:1.5;color:rgba(255,255,255,.88)}
+.warning{margin-top:16px;padding:14px;border-radius:14px;background:#fff1f2;color:#be123c;display:none}
+@media(max-width:640px){.app{padding:22px}.result-value{font-size:2.4rem}}
 </style>
 </head>
 <body>
 <main class="app">
-<div class="badge">UK VAT Included</div>
+<div class="badge">Flexible VAT Support</div>
 <h1>John Pye Reverse Calculator</h1>
 <p class="subtitle">Enter either your maximum final spend or a hammer bid amount and the calculator will instantly work out the full auction costs.</p>
 
@@ -161,6 +58,11 @@ display:none
 <label for="deliveryInput">Delivery Cost (£)</label>
 <input id="deliveryInput" type="number" step="0.01" value="7.99">
 </div>
+
+<div class="field">
+<label for="vatInput">VAT Rate on Hammer (%)</label>
+<input id="vatInput" type="number" step="0.1" value="20">
+</div>
 </div>
 
 <div class="warning" id="warning">The final total must be greater than the delivery cost.</div>
@@ -171,14 +73,14 @@ display:none
 
 <div class="breakdown">
 <div class="row"><span>Hammer Price</span><span id="hammerValue">£0.00</span></div>
-<div class="row"><span>VAT on Hammer (20%)</span><span id="vatValue">£0.00</span></div>
+<div class="row"><span>VAT on Hammer</span><span id="vatValue">£0.00</span></div>
 <div class="row"><span>Buyer’s Premium incl. VAT (30%)</span><span id="bpValue">£0.00</span></div>
 <div class="row"><span>Delivery</span><span id="deliveryValue">£0.00</span></div>
 <div class="row total"><span>Final Total</span><span id="finalValue">£0.00</span></div>
 </div>
 
 <div class="note">
-Calculations assume standard UK VAT at 20% and a John Pye buyer’s premium of 25% + VAT.
+The VAT rate only applies to the hammer price. Buyer’s premium remains fixed at 25% + VAT (30% gross), useful for reduced VAT items such as children’s car seats.
 </div>
 </section>
 </main>
@@ -187,6 +89,7 @@ Calculations assume standard UK VAT at 20% and a John Pye buyer’s premium of 2
 const totalInput=document.getElementById('totalInput');
 const hammerInput=document.getElementById('hammerInput');
 const deliveryInput=document.getElementById('deliveryInput');
+const vatInput=document.getElementById('vatInput');
 const warning=document.getElementById('warning');
 
 const mainResult=document.getElementById('mainResult');
@@ -196,15 +99,22 @@ const bpValue=document.getElementById('bpValue');
 const deliveryValue=document.getElementById('deliveryValue');
 const finalValue=document.getElementById('finalValue');
 
-const MULTIPLIER=1.5;
 let activeInput='total';
 
 function money(v){
 return '£'+(Number(v)||0).toFixed(2)
 }
 
+function getVatRate(){
+return (parseFloat(vatInput.value)||20)/100
+}
+
+function getMultiplier(){
+return 1+getVatRate()+0.3
+}
+
 function updateBreakdown(hammer,delivery){
-const vat=hammer*0.2;
+const vat=hammer*getVatRate();
 const bp=hammer*0.3;
 const total=hammer+vat+bp+delivery;
 
@@ -227,7 +137,7 @@ return;
 }
 
 warning.style.display='none';
-const hammer=(total-delivery)/MULTIPLIER;
+const hammer=(total-delivery)/getMultiplier();
 hammerInput.value=hammer.toFixed(2);
 updateBreakdown(hammer,delivery);
 }
@@ -235,9 +145,9 @@ updateBreakdown(hammer,delivery);
 function calculateFromHammer(){
 const hammer=parseFloat(hammerInput.value)||0;
 const delivery=parseFloat(deliveryInput.value)||0;
+const total=(hammer*getMultiplier())+delivery;
 
 warning.style.display='none';
-const total=(hammer*MULTIPLIER)+delivery;
 totalInput.value=total.toFixed(2);
 updateBreakdown(hammer,delivery);
 }
@@ -252,13 +162,16 @@ activeInput='hammer';
 calculateFromHammer();
 });
 
-deliveryInput.addEventListener('input',()=>{
+function recalculate(){
 if(activeInput==='hammer'){
 calculateFromHammer();
 }else{
 calculateFromTotal();
 }
-});
+}
+
+deliveryInput.addEventListener('input',recalculate);
+vatInput.addEventListener('input',recalculate);
 
 updateBreakdown(0,7.99);
 </script>
