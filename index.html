@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>John Pye Reverse Calculator</title>
+<title>John Pye Reverse costs calculator</title>
 <style>
 :root{--text:#172033;--muted:#667085;--primary:#2563eb;--border:#dbe4f0;--soft:#f8fbff}
 *{box-sizing:border-box}
@@ -17,14 +17,14 @@ h1{margin:0 0 10px;font-size:2rem}.subtitle{margin:0 0 28px;color:var(--muted);l
 <body>
 <main class="app">
 <h1>John Pye Reverse Calculator</h1>
-<p class="subtitle">Enter either your maximum final spend or a hammer bid amount and the calculator will instantly work out the full auction costs.</p>
+<p class="subtitle">Enter either your maximum final spend or a hammer bid amount, and the calculator will work out the full auction costs.</p>
 <div class="grid">
 <div class="field"><label for="totalInput">Maximum Final Total (£)</label><input id="totalInput" type="number" step="0.01" placeholder="e.g. 150.00"></div>
 <div class="field"><label for="hammerInput">Hammer Price Ex VAT (£)</label><input id="hammerInput" type="number" step="0.01" placeholder="e.g. 85.00"></div>
 <div class="field"><label for="deliveryInput">Delivery Cost Ex VAT (£)</label><input id="deliveryInput" type="number" step="0.01" value="7.99"></div>
 <div class="field"><label for="vatInput">VAT Rate on Hammer (%)</label><input id="vatInput" type="number" step="0.1" value="20"></div>
 </div>
-<div class="warning" id="warning">The final total must be greater than the delivery cost including VAT.</div>
+<div class="warning" id="warning">The final total must be greater than the delivery cost, including VAT.</div>
 <section class="result">
 <div class="result-title">Calculated Hammer Bid</div>
 <div class="result-value" id="mainResult">£0.00</div>
@@ -43,7 +43,7 @@ h1{margin:0 0 10px;font-size:2rem}.subtitle{margin:0 0 28px;color:var(--muted);l
 <div class="row"><span>Delivery Inc VAT</span><span id="deliveryInc">£0.00</span></div>
 <div class="row total"><span>Final Total</span><span id="finalTotal">£0.00</span></div>
 </div>
-<div class="note">Delivery always has standard UK VAT applied at 20%. Buyer’s premium is fixed at 25% + VAT (30% gross).</div>
+<div class="note">Delivery always has VAT applied at 20%. Buyer's premium is 25% + VAT (30% gross).</div>
 </section>
 </main>
 <script>
